@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ include "java-app-chart.fullname" . }}
+  labels:
+    {{- include "java-app-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.application.replicaCount }}
+  revisionHistoryLimit: {{ .Values.application.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "java-app-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "java-app-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "java-app-chart.fullname" . }}
+          image: "{{ .Values.application.image.repository }}:{{ .Values.application.image.tag | default "0.1" }}"
+          imagePullPolicy: {{ .Values.application.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+              name: http
+          {{- with .Values.application.probes}}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with .Values.application.resources }}
+          resources:
+          {{- toYaml . | nindent 12}}
+          {{- end }}
