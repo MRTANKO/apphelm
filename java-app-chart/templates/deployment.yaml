@@ -30,19 +30,19 @@ spec:
           {{- toYaml . | nindent 12}}
           {{- end }}
           env:
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.application.database.db-credential }}
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.application.database.db-credential }}
-                  key: password
-            - name: DB_HOST
-              value: {{ .Values.application.database.DB_HOST }}
-            - name: DB_PORT
-              value: {{ .Values.application.database.DB_PORT }}
-            - name: DB_NAME
-              value: {{ .Values.application.database.DB_NAME }}
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.application.database.db-credential }}
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.application.database.db-credential }}
+                key: password
+          - name: DB_HOST
+            value: {{ .Values.application.database.DB_HOST }}
+          - name: DB_PORT
+            value: {{ .Values.application.database.DB_PORT }}
+          - name: DB_NAME
+            value: {{ .Values.application.database.DB_NAME }}
