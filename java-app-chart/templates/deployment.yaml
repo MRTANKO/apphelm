@@ -33,12 +33,12 @@ spec:
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.application.database.db-credential }}
+                name: {{ .Values.application.database.credentialToDB }}
                 key: username
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.application.database.db-credential }}
+                name: {{ .Values.application.database.credentialToDB }}
                 key: password
           - name: DB_HOST
             value: {{ .Values.application.database.DB_HOST }}
