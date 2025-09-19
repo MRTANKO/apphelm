@@ -41,8 +41,8 @@ spec:
                 name: {{ .Values.application.database.credentialToDB }}
                 key: password
           - name: DB_HOST
-            value: {{ .Values.application.database.DB_HOST }}
+            value: {{ .Values.application.database.DB_HOST | quote }}
           - name: DB_PORT
-            value: {{ .Values.application.database.DB_PORT }}
+            value: {{ .Values.application.database.DB_PORT| quote }}
           - name: DB_NAME
-            value: {{ .Values.application.database.DB_NAME }}
+            value: {{ .Values.application.database.DB_NAME| quote }}
